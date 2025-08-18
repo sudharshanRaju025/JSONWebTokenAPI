@@ -13,6 +13,8 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Security.Claims;
 using System.Text;
+using DynamicAuthorization.Mvc.Core.Extensions;
+using DynamicAuthorization.Mvc.MsSqlServerStore;
 
 
 
@@ -32,9 +34,17 @@ builder.Host.UseSerilog((context, loggerConfiguration) =>
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Details")));
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("AccessDetails")));
 
+builder.Services.AddDynamicAuthorization<AppDbContext>(options =>
+{
+    options.DefaultAdminUser = "Admin@gmail.com";
+
+})
+    .AddSqlServerStore(options =>
+    {
+        options.ConnectionString =
+        builder.Configuration.GetConnectionString("Details");
+    });
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
         .AddEntityFrameworkStores<AppDbContext>()
