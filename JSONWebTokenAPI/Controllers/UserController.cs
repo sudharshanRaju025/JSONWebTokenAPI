@@ -33,13 +33,13 @@ namespace JSONWebTokenAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles ="Admin")]
+       
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var result = await _context.users.FindAsync(id);
             if (result == null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "404", Message = "No Content" });
+                return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "404", Message = "No Content" });
             }
             if (result != null)
             {
@@ -106,7 +106,7 @@ namespace JSONWebTokenAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="User,Admin")]
+        //[Authorize(Roles="User,Admin")]
         public async Task<ActionResult<IEnumerable<User>>> UserEndPoint()
         {
             var projected = await _context.users

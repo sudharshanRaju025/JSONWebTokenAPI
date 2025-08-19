@@ -23,6 +23,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 Log.Information("Starting server.");
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((context, loggerConfiguration) =>
@@ -46,7 +47,7 @@ builder.Services.AddDynamicAuthorization<AppDbContext>(options =>
         builder.Configuration.GetConnectionString("Details");
     });
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
         .AddEntityFrameworkStores<AppDbContext>()
         .AddDefaultTokenProviders();
 
@@ -92,12 +93,11 @@ builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<RefreshTokenService>();
 builder.Services.AddSingleton<ICredentialsValidator, CredentialsValidator>();
 builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
-builder.Services.AddScoped(typeof(JSONWebTokenAPI.Authentication.ILogger<>),
-                           typeof(JSONWebTokenAPI.Authentication.Logger<>));
 builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddInMemoryRateLimiting();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddScoped(typeof(JSONWebTokenAPI.Authentication.ILogger<>),typeof(JSONWebTokenAPI.Authentication.Logger<>));
 
 builder.Services.AddSession(options =>
     {
@@ -140,12 +140,9 @@ builder.Services.AddSwaggerGen(c =>
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "JWTokenWebAPI", Version = "v1" });
     });
 
-
-
 builder.Services.AddScoped<BackgroundServiceTask>();
 
 var app = builder.Build();
-
 
 using (var scope = app.Services.CreateScope())
     {
