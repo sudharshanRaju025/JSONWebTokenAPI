@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JSONWebTokenAPI.Authentication;
 using JSONWebTokenAPI.Model;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
 namespace JSONWebTokenAPI.Controllers
 {
     //[Authorize]

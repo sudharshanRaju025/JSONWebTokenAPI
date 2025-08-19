@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 using System.Security.Claims;
 
 public class CustomRateLimitingMiddleware

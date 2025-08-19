@@ -1,9 +1,5 @@
-﻿using JSONWebTokenAPI;
-using JSONWebTokenAPI.Authentication;
-using JSONWebTokenAPI.Model;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using JSONWebTokenAPI.Model;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 

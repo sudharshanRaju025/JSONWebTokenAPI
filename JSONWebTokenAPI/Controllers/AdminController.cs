@@ -1,6 +1,5 @@
 ﻿using JSONWebTokenAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/[controller]")]
