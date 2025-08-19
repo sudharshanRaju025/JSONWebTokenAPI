@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using JSONWebTokenAPI.Authentication;
+using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
 public class UserRoleService
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserRoleService(UserManager<IdentityUser> userManager)
+    public UserRoleService(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }

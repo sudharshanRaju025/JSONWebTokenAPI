@@ -84,6 +84,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddLogging();
 builder.Services.AddMemoryCache();
 
+
+builder.Services.AddScoped<DynamicAccess>();
+builder.Services.AddScoped<UserRoleService>();
+
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<RefreshTokenService>();
 builder.Services.AddSingleton<ICredentialsValidator, CredentialsValidator>();
